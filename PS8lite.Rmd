@@ -192,11 +192,14 @@ Fit one Random Forest model `model_rf` using any approach you want.
 ```{r}
 #MVP: model_rf <- randomForest(form = model_formula, data = training, mtry = 2, ntree = 100)
 
+#Defining cv settings
 fit_control <- trainControl(method = "cv", number = 10)
 
+#Search grid for tuning parameters (mtry)
 mtry <- 2:6
 tunegrid <- expand.grid(.mtry = mtry)
 
+#Fit/train model on training data
 model_rf <- caret::train(form = model_formula, 
                                data = training, 
                                method = "rf", 
@@ -204,7 +207,7 @@ model_rf <- caret::train(form = model_formula,
                                trControl = fit_control, 
                                tuneGrid = tunegrid)
 
-model_rf # to see which mtry gets used
+model_rf #See which mtry value gets used
 ```
 
 
